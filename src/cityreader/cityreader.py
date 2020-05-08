@@ -88,24 +88,30 @@ for c in cities:
 
 # return within
 
+point1 = input("enter lat1, lon1:").split(",")
+point2 = input("enter lat2, lon2:").split(",")
+lat1, lon1 = float(point1[0]), float(point1[1])
+lat2, lon2 = float(point2[0]), float(point2[1])
+
+
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):  
    
     within = []
     # the specified coordinates.
     # city = cityreader(cities)
-    city = cities
-    for x in city:
-        if float(x.lat) < float(lat1) and float(x.lat) > float(lat2) and float(x.lon) < float(lon1) and float(x.lon) > float(lon2):
-            # print('passed')
-            withinCities = City(f"{x.name}", float(x.lat), float(x.lon))
-            # withinCities = {'name': f"{x.name}", 'lat': float(x.lat), 'lon': float(x.lon)}
-        
-            within.append(withinCities)
-    for w in within:
-      print(w)
+    # for x in cities:
+    #   if float(x.lat) <= float(lat1) and float(x.lat) >= float(lat2):
+    #     if float(x.lon) <= float(lon1) and float(x.lon) >= float(lon2):
+    #       within.append(x)
+
+    
+    for city in cities:
+        if city.lat <= max(lat1, lat2) and city.lat >= min(lat1, lat2):
+                  if city.lon <= max(lon1, lon2) and city.lon >= min(lon1, lon2):
+                        within.append(city)
+                        print(city)      
 
     return within
 
 
-cityreader_stretch(45, -100, 32, -120, cities)
-# cityreader_stretch(40, -50, 12, -120)
+cityreader_stretch(lat1, lon1, lat2, lon2, cities)
